@@ -7,6 +7,7 @@ import datetime
 import coffea.util
 from coffea.dataset_tools import preprocess, apply_to_fileset
 from cowtools import GetDefaultCondorClient, move_x509
+from pathlib import Path
 
 from coffea_clusters_function import ExampleAnalyzer
 from filesets.example_files import fileset
@@ -32,6 +33,7 @@ def main(kwargs):
 
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     outfile = os.path.join(args.outdir, f"output_coffea_clusters_run{timestamp}.coffea")
+    Path(args.outdir).mkdir(parents=True, exist_ok=True)
     coffea.util.save(coutputs,outfile)
     print(f"Saved output to {outfile} (this is what you pass to plotting.py)")
 
